@@ -10,6 +10,7 @@
 #import "ZCBaseControl.h"
 #import "TableView.h"
 #import "Masonry.h"
+#import "ZCControl/ZCBaseView.h"
 
 @interface ViewController ()<UIScrollViewDelegate,viewDelegate>
 @property (nonatomic,strong) ZCBaseControl *seg;
@@ -20,7 +21,9 @@
 @property (nonatomic,strong) UIView *historyView;
 @property (nonatomic,strong) UIView *nowView;
 @property (nonatomic,strong) UIView *futureView;
+@property (nonatomic,strong) ZCBaseView *baseView;
 @end
+
 
 @implementation ViewController
 
@@ -77,15 +80,14 @@
         
         make.edges.equalTo(self.futureView);
     }];
-
-    
-    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.view addSubview:self.seg];
-    [self.view addSubview:self.contentSC];
+//    [self.view addSubview:self.seg];
+//    [self.view addSubview:self.contentSC];
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.view = self.baseView;
 }
 
 
@@ -195,7 +197,14 @@
 }
 
 
-
+- (ZCBaseView *)baseView
+{
+    if(_baseView == nil)
+    {
+        _baseView = [[ZCBaseView alloc] initWithTitles:@[@"历史", @"现在",@"未来"] AndViews:@[self.historyTB,self.nowTB,self.futureTB] AtFrame:self.view.bounds];
+    }
+    return _baseView;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
