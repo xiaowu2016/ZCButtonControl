@@ -10,7 +10,7 @@
 #import "ZCBaseControl.h"
 #import "Masonry.h"
 
-@interface ZCBaseView ()<UIScrollViewDelegate>
+@interface ZCBaseView ()
 @property (nonatomic,strong) ZCBaseControl *baseControl;
 @property (nonatomic,strong) UIScrollView *scrollView;
 @property (nonatomic,strong) NSArray *titleArray;
@@ -50,7 +50,6 @@
    
     for(NSUInteger i = 0; i < self.viewArray.count ; i++)
     {
-        [self.scrollView addSubview:self.viewArray[i]];
         if(i == 0)
         {
             [self.viewArray[i] mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -72,19 +71,10 @@
 
 
 
-- (void)clickSegmentAction
+- (void)clickButtonAction
 {
     [self.scrollView setContentOffset:CGPointMake(self.scrollView.frame.size.width * self.baseControl.selectIndex, 0) animated:YES];
 }
-
-
-// 实现代理方法
-- (void)ShouldEnterDetailViewControllerWithItem:(id)item{
-    
-    NSLog(@"%@",item);
-    
-}
-
 
 #pragma mark setter ,getter
 - (NSArray *)titleArray
@@ -110,7 +100,7 @@
     if(_baseControl == nil)
     {
         _baseControl = [[ZCBaseControl alloc] initWithTitles:self.titleArray];
-        [_baseControl addTarget:self action:@selector(clickSegmentAction) forControlEvents:UIControlEventValueChanged];
+        [_baseControl addTarget:self action:@selector(clickButtonAction) forControlEvents:UIControlEventValueChanged];
         _baseControl.selectIndex = 0;
     }
     return _baseControl;
@@ -122,11 +112,10 @@
     {
         _scrollView = [[UIScrollView alloc] init];
         _scrollView.scrollEnabled = NO;
-        _scrollView.delegate = self;
-//        for(UIView *view in self.viewArray)
-//        {
-//            [_scrollView addSubview:view];
-//        }
+        for(UIView *view in self.viewArray)
+        {
+            [_scrollView addSubview:view];
+        }
     }
     return _scrollView;
 }

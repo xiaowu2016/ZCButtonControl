@@ -9,139 +9,29 @@
 #import "ViewController.h"
 #import "ZCBaseControl.h"
 #import "TableView.h"
-#import "Masonry.h"
-#import "ZCControl/ZCBaseView.h"
+#import "ZCBaseView.h"
 
-@interface ViewController ()<UIScrollViewDelegate,viewDelegate>
-@property (nonatomic,strong) ZCBaseControl *seg;
-@property (nonatomic,strong) UIScrollView *contentSC;
+@interface ViewController ()<viewDelegate>
 @property (nonatomic,strong) TableView *historyTB;
 @property (nonatomic,strong) TableView *nowTB;
 @property (nonatomic,strong) TableView *futureTB;
-@property (nonatomic,strong) UIView *historyView;
-@property (nonatomic,strong) UIView *nowView;
-@property (nonatomic,strong) UIView *futureView;
 @property (nonatomic,strong) ZCBaseView *baseView;
 @end
 
 
 @implementation ViewController
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self.seg mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.equalTo(self.view).offset(4);
-        make.right.equalTo(self.view).offset(-4);
-        make.top.equalTo(self.view).offset(20);
-        make.height.mas_equalTo(35);
-    }];
-    
-    [self.contentSC mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.top.equalTo(self.seg.mas_bottom);
-        make.left.right.equalTo(self.view);
-        make.bottom.equalTo(self.view).offset(0);
-    }];
-    
-    [self.historyView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.size.equalTo(self.contentSC);
-        make.left.top.equalTo(self.contentSC);
-    }];
-    
-    [self.nowView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.size.equalTo(self.contentSC);
-        make.top.equalTo(self.contentSC);
-        make.left.equalTo(self.historyView.mas_right);
-    }];
-    
-    
-    [self.futureView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.size.equalTo(self.contentSC);
-        make.top.equalTo(self.contentSC);
-        make.left.equalTo(self.nowView.mas_right);
-    }];
-    
-    [self.historyTB mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.edges.equalTo(self.historyView);
-    }];
-    
-    [self.nowTB mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.edges.equalTo(self.nowView);
-    }];
-    
-    [self.futureTB mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.edges.equalTo(self.futureView);
-    }];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    [self.view addSubview:self.seg];
-//    [self.view addSubview:self.contentSC];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.view = self.baseView;
+    [self.view addSubview:self.baseView];
 }
 
-
-
-- (void)clickSegmentAction
+- (void)ShouldEnterDetailViewControllerWithItem:(id)item
 {
-    [self.contentSC setContentOffset:CGPointMake(self.contentSC.frame.size.width * self.seg.selectIndex, 0) animated:YES];
+    NSLog(@"点击了cell");
 }
-
-// 实现代理方法
-- (void)ShouldEnterDetailViewControllerWithItem:(id)item{
-    
-    NSLog(@"%@",item);
-    
-}
-
-
-- (ZCBaseControl *)seg
-{
-    if(_seg == nil)
-    {
-        _seg = [[ZCBaseControl alloc] initWithTitles:@[@"历史", @"现在",@"未来"]];
-        [_seg addTarget:self action:@selector(clickSegmentAction) forControlEvents:UIControlEventValueChanged];
-        _seg.selectIndex = 0;
-    }
-    return _seg;
-}
-
-
-- (UIScrollView *)contentSC
-{
-    if(_contentSC == nil)
-    {
-        _contentSC = [[UIScrollView alloc] init];
-        _contentSC.scrollEnabled = NO;
-        _contentSC.delegate = self;
-        [_contentSC addSubview:self.historyView];
-        [_contentSC addSubview:self.nowView];
-        [_contentSC addSubview:self.futureView];
-    }
-    return _contentSC;
-}
-
-
-- (UIView *)historyView
-{
-    if(_historyView == nil)
-    {
-        _historyView = [[UIView alloc] init];
-        [_historyView addSubview:self.historyTB];
-    }
-    return _historyView;
-}
-
 
 - (TableView *)historyTB
 {
@@ -154,15 +44,6 @@
     return _historyTB;
 }
 
-- (UIView *)nowView
-{
-    if(_nowView == nil)
-    {
-        _nowView = [[UIView alloc] init];
-        [_nowView addSubview:self.nowTB];
-    }
-    return _nowView;
-}
 
 - (TableView *)nowTB
 {
@@ -175,15 +56,7 @@
     return _nowTB;
 }
 
-- (UIView *)futureView
-{
-    if(_futureView == nil)
-    {
-        _futureView = [[UIView alloc] init];
-        [_futureView addSubview:self.futureTB];
-    }
-    return _futureView;
-}
+
 
 - (TableView *)futureTB
 {
