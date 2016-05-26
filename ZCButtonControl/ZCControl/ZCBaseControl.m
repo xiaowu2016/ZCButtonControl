@@ -8,7 +8,7 @@
 
 #import "ZCBaseControl.h"
 #import "UIView+Masonry_ZC.h"
-#import <Masonry.h>
+#import "Masonry.h"
 
 @interface ZCBaseControl ()<UIScrollViewDelegate>
 @property (nonatomic,strong) UIImageView *squreView;
