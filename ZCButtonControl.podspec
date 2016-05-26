@@ -1,4 +1,4 @@
-#
+
 #  Be sure to run `pod spec lint ZCButtonControl.podspec' to ensure this is a
 #  valid spec and to remove all comments including this before submitting the spec.
 #
@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "ZCButtonControl"
-  s.version      = "0.0.2"
+  s.version      = "0.0.3"
   s.summary      = "ZCButtonControl"
 
   # This description is used to generate tags and improve search results.
@@ -79,7 +79,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/xiaowu2016/ZCButtonControl.git", :tag => "0.0.2" }
+  s.source       = { :git => "https://github.com/xiaowu2016/ZCButtonControl.git", :tag => "0.0.3" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
