@@ -35,10 +35,10 @@
 {
     [self.baseControl mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(self).offset(4);
-        make.right.equalTo(self).offset(-4);
-        make.top.equalTo(self).offset(20);
-        make.height.mas_equalTo(35);
+        make.left.equalTo(self).offset(0);
+        make.right.equalTo(self).offset(0);
+        make.top.equalTo(self).offset(2);
+        make.height.mas_equalTo(38);
     }];
     
     [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
