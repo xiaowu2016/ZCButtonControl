@@ -25,4 +25,10 @@
  *  @param color 颜色
  */
 - (void)setButtonViewBackgroundColor:(UIColor *)color;
+/**
+ *  跳转的时候是否添加动画
+ *
+ *  @param animated YES/NO
+ */
+- (void)setAnimated:(BOOL)animated;
 @end

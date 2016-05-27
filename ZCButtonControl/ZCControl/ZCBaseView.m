@@ -15,6 +15,7 @@
 @property (nonatomic,strong) UIScrollView *scrollView;
 @property (nonatomic,strong) NSArray *titleArray;
 @property (nonatomic,strong) NSArray *viewArray;
+@property (nonatomic,assign) BOOL isAnimated;
 @end
 
 @implementation ZCBaseView
@@ -24,6 +25,7 @@
     {
         self.titleArray = titles;
         self.viewArray = views;
+        self.isAnimated = YES;
         [self addSubview:self.baseControl];
         [self addSubview:self.scrollView];
         [self setFrames];
@@ -69,6 +71,11 @@
     }
 }
 
+- (void)setAnimated:(BOOL)animated
+{
+    self.isAnimated = animated;
+}
+
 - (void)setButtonViewBackgroundColor:(UIColor *)color;
 {
     self.baseControl.backgroundColor = color;
@@ -76,7 +83,7 @@
 
 - (void)clickButtonAction
 {
-    [self.scrollView setContentOffset:CGPointMake(self.scrollView.frame.size.width * self.baseControl.selectIndex, 0) animated:YES];
+    [self.scrollView setContentOffset:CGPointMake(self.scrollView.frame.size.width * self.baseControl.selectIndex, 0) animated:self.isAnimated];
 }
 
 #pragma mark setter ,getter

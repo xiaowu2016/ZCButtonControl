@@ -28,6 +28,7 @@
     [self.view addSubview:self.baseView];
     self.baseView.backgroundColor = [UIColor yellowColor];
     [self.baseView setButtonViewBackgroundColor:[UIColor yellowColor]];
+    [self.baseView setAnimated:YES];
 }
 
 - (void)ShouldEnterDetailViewControllerWithItem:(id)item
