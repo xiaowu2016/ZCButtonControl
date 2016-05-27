@@ -69,7 +69,10 @@
     }
 }
 
-
+- (void)setButtonViewBackgroundColor:(UIColor *)color;
+{
+    self.baseControl.backgroundColor = color;
+}
 
 - (void)clickButtonAction
 {

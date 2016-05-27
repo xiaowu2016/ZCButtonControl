@@ -26,6 +26,8 @@
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self.view addSubview:self.baseView];
+    self.baseView.backgroundColor = [UIColor yellowColor];
+    [self.baseView setButtonViewBackgroundColor:[UIColor yellowColor]];
 }
 
 - (void)ShouldEnterDetailViewControllerWithItem:(id)item

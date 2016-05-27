@@ -19,4 +19,10 @@
  *  @return 组合页面
  */
 - (instancetype)initWithTitles:(NSArray *)titles AndViews:(NSArray *)views AtFrame:(CGRect)frame;
+/**
+ *  设置控件按钮部位的颜色
+ *
+ *  @param color 颜色
+ */
+- (void)setButtonViewBackgroundColor:(UIColor *)color;
 @end
