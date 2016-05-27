@@ -10,7 +10,7 @@
 #import "ZCBaseControl.h"
 #import "Masonry.h"
 
-@interface ZCBaseView ()
+@interface ZCBaseView ()<UIScrollViewDelegate>
 @property (nonatomic,strong) ZCBaseControl *baseControl;
 @property (nonatomic,strong) UIScrollView *scrollView;
 @property (nonatomic,strong) NSArray *titleArray;
@@ -86,6 +86,13 @@
     [self.scrollView setContentOffset:CGPointMake(self.scrollView.frame.size.width * self.baseControl.selectIndex, 0) animated:self.isAnimated];
 }
 
+
+#pragma mark UIScrollViewDelegate
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+        self.baseControl.selectIndex = (NSInteger)scrollView.contentOffset.x/CGRectGetWidth(self.scrollView.frame);
+}
+
 #pragma mark setter ,getter
 - (NSArray *)titleArray
 {
@@ -121,7 +128,13 @@
     if(_scrollView == nil)
     {
         _scrollView = [[UIScrollView alloc] init];
-        _scrollView.scrollEnabled = NO;
+        _scrollView.scrollEnabled = YES;
+        _scrollView.contentSize = CGSizeMake(CGRectGetWidth(self.frame)*self.viewArray.count,CGRectGetHeight(self.frame) - 40);
+        //设置分页滑动
+        _scrollView.pagingEnabled = YES;
+        _scrollView.delegate = self;
+        //禁止回弹
+        _scrollView.bounces = NO;
         for(UIView *view in self.viewArray)
         {
             [_scrollView addSubview:view];
