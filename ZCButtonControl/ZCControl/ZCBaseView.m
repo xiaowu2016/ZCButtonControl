@@ -84,14 +84,38 @@
 - (void)clickButtonAction
 {
     [self.scrollView setContentOffset:CGPointMake(self.scrollView.frame.size.width * self.baseControl.selectIndex, 0) animated:self.isAnimated];
+    self.currentView = [self.viewArray objectAtIndex:self.baseControl.selectIndex];
 }
 
 
 #pragma mark UIScrollViewDelegate
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-        self.baseControl.selectIndex = (NSInteger)scrollView.contentOffset.x/CGRectGetWidth(self.scrollView.frame);
+    self.baseControl.selectIndex = (NSInteger)scrollView.contentOffset.x/CGRectGetWidth(self.scrollView.frame);
+    self.currentView = [self.viewArray objectAtIndex:self.baseControl.selectIndex];
 }
+
+
+//-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+//    
+//    CGFloat i = self.scrollView.contentOffset.x/(NSInteger)CGRectGetWidth(scrollView.frame);
+//    i = i - self.baseControl.selectIndex;
+//    int j;
+//    if(i < 0)
+//    {
+//        j = -1;
+//        i = i * j;
+//    }
+//    else
+//    {
+//        j = 1;
+//    }
+//    if(i > 0.5)
+//    {
+//        self.baseControl.selectIndex = (NSInteger)scrollView.contentOffset.x/CGRectGetWidth(self.scrollView.frame) + j;
+//    }
+//    
+//}
 
 #pragma mark setter ,getter
 - (NSArray *)titleArray

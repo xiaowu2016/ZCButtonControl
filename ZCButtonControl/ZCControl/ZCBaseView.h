@@ -10,6 +10,10 @@
 
 @interface ZCBaseView : UIView
 /**
+ *  当前显示的视图
+ */
+@property (nonatomic,strong) UIView *currentView;
+/**
  *  通过传入的标题名，页面，和frame来创建一个新的组合页面
  *
  *  @param title 标题名
