@@ -71,10 +71,7 @@
         make.width.mas_equalTo(width + 10);
     }];
     
-    [UIView animateWithDuration:0.2 animations:^{
-        
-        [self layoutIfNeeded];
-    }];
+    [self layoutIfNeeded];
     
     _selectIndex = btn.tag - 1;
     
